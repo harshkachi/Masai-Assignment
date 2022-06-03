@@ -1,0 +1,80 @@
+Q2 You are given a table in 1NF form. You need to express this table in second normal
+forms and Explain the rules for 2NF.
+
+
+customer_id          StoreId                        location
+1                      D1                           Toronto
+2                      D2                            Miami
+3                      D3                           Florida
+4                      D4                            Texas
+5                      D5                          California
+
+
+--------------------------------------------------------------------------
+
+create table Store
+(
+ store_id char(2) Primary Key ,
+ customer_id int  
+);
+
+insert into store values( 'D1' , 1 );
+insert into store values( 'D2' , 2 );
+insert into store values( 'D3' , 3 );
+insert into store values( 'D4' , 4 );
+insert into store values( 'D5' , 5 );
+
+
+mysql> select * from store
+    -> ;
++----------+-------------+
+| store_id | customer_id |
++----------+-------------+
+| D1       |           1 |
+| D2       |           2 |
+| D3       |           3 |
+| D4       |           4 |
+| D5       |           5 |
++----------+-------------+
+5 rows in set (0.00 sec)
+
+
+
+
+create table locations
+(
+ store_id char(5) Primary Key ,
+ location varchar(35)
+);
+
+
+insert into locations values( 'D1' , 'Toronto' );
+insert into locations values( 'D2' , 'Miami' );
+insert into locations values( 'D3' , 'Florida' );
+insert into locations values( 'D4' , 'Texas' );
+insert into locations values( 'D5' , 'California' );
+
+
+mysql> select * from locations
+    -> ;
++----------+------------+
+| store_id | location   |
++----------+------------+
+| D1       | Toronto    |
+| D2       | Miami      |
+| D3       | Florida    |
+| D4       | Texas      |
+| D5       | California |
++----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from store LEFT JOIN locations ON store.store_id = locations.store_id;
+
+
+Rules for 2NF =
+
+1. Table is in 1NF (First normal form
+2. Non Prime attribute should not depend on subset of candidate key.
+
+
+

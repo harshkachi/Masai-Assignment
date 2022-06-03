@@ -1,0 +1,30 @@
+Q3.When do we create indexes? write the steps to create Indexes On a table?
+
+
+---------------------------------------------------------------------
+
+Indexing makes columns faster to query by creating pointers to where data is stored within a database.
+Indexing uses B-tree algo. It reults when we want faster results without reading every row sequentially.
+
+
+
+
+CREATE TABLE Persons (
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int,
+PRIMARY KEY (ID)
+);
+
+
+insert into Persons values(1, 'Kohli', 'Virat',33);
+insert into Persons values(2, 'Sharma', 'Rohit',35);
+insert into Persons values(3, 'Dhoni', 'Mahendra', 38);
+
+
+mysql> CREATE INDEX idxID ON Persons (id);
+
+mysql> DROP INDEX idxID ON persons;
+
+

@@ -1,0 +1,4 @@
+Q.3 Explain what is a PK, Candidate Key, Prime Attributes, Non-prime Attributes
+
+PK = 
+

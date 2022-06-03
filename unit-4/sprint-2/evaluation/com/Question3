@@ -1,0 +1,27 @@
+
+String:
+Strings, which are widely used in Java programming, are a sequence of characters.
+
+For example
+String greeting = "Hello Web-16";
+
+To find the strings length() method, which returns the number of characters contained in the string object.
+Others methods are available like Concatenating , join, split, trim etc.
+
+The String class is immutable, so that once it is created a String object cannot be changed. 
+If there is a necessity to make a lot of modifications to Strings of characters, 
+then you should use String Buffer & String Builder.
+
+--------------------------------------------
+
+StringBuilder and StringBuffer are classes used in JAVA to provide us with functionality of mutable Strings. 
+StringBuffer provides us with strings that are safe to use with multiple threads 
+but this added functionality also makes it slower. StringBuilder lacks thread safety 
+but because it does not have this added functionality, it has faster implementation.
+
+-----------------------------
+
+If you want to represent any object as a string, toString() method comes into existence.
+The toString() method returns the String representation of the object.
+
+

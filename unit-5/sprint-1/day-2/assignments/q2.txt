@@ -1,0 +1,88 @@
+Q2. write the query to display the vacation hours for salaried faculty based on their
+working hours. If working hours <=50 update their vacation hours to ‘not allowed’,
+working hours <=80 update their vacation hours to 20, working hours <=120 update
+their vacation hours to 40.
+
+
+mysql> use u5d2;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_u5d2 |
++----------------+
+| faculty        |
++----------------+
+1 row in set (0.01 sec)
+
+mysql> select * from faculty;
++-----------+---------+------------+--------+--------+---------------+
+| FacultyID | Name    | Department | Gender | Salary | Working_hours |
++-----------+---------+------------+--------+--------+---------------+
+|         1 | Aakash  | CS         | M      |  50000 |            45 |
+|         2 | Sahil   | EC         | M      |  25000 |            50 |
+|         3 | Jhon    | HSS        | M      | 100000 |            60 |
+|         4 | Shelley | CS         | F      |  75000 |            80 |
+|         5 | Anannya | CS         | F      |  45000 |           100 |
+|         6 | Sia     | HSS        | F      |  60000 |            40 |
++-----------+---------+------------+--------+--------+---------------+
+6 rows in set (0.00 sec)
+
+
+mysql> SELECT *,
+    -> CASE
+    -> WHEN Working_hours <=50 THEN 'NOT ALLOWED'
+    -> WHEN Working_hours > 50 AND Working_hours <= 80 THEN '20'
+    -> WHEN Working_hours > 80 AND Working_hours <= 120 THEN '40'
+    -> END
+    -> AS Vacation
+    -> from faculty;
++-----------+---------+------------+--------+--------+---------------+-------------+
+| FacultyID | Name    | Department | Gender | Salary | Working_hours | Vacation    |
++-----------+---------+------------+--------+--------+---------------+-------------+
+|         1 | Aakash  | CS         | M      |  50000 |            45 | NOT ALLOWED |
+|         2 | Sahil   | EC         | M      |  25000 |            50 | NOT ALLOWED |
+|         3 | Jhon    | HSS        | M      | 100000 |            60 | 20          |
+|         4 | Shelley | CS         | F      |  75000 |            80 | 20          |
+|         5 | Anannya | CS         | F      |  45000 |           100 | 40          |
+|         6 | Sia     | HSS        | F      |  60000 |            40 | NOT ALLOWED |
++-----------+---------+------------+--------+--------+---------------+-------------+
+6 rows in set (0.00 sec)
+
+
+
+SELECT *,
+CASE
+WHEN Working_hours <=50 THEN 'NOT ALLOWED'
+WHEN Working_hours > 50 AND Working_hours <= 80 THEN '20'
+WHEN Working_hours > 80 AND Working_hours <= 120 THEN '40'
+END
+AS Vacation
+from faculty;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+

@@ -1,0 +1,97 @@
+
+create table Movie_table(
+ID int,
+Title varchar(25),
+Director varchar(25),
+year int,
+length_minutes int
+);
+
+insert into Movie_table values(1,'Toy Story', 'Jhon Lasseter', 1995, 81);
+insert into Movie_table values(2,'A Bugs Life', 'Jhon Lasseter', 1998, 95);
+insert into Movie_table values(3,'Toy Story 2', 'Jhon Lasseter', 1999, 93);
+insert into Movie_table values(4,'Monsters, inc.', 'Pete Docter', 2001, 92);
+insert into Movie_table values(5,'Civil War', 'Andrew Stanton', 2003, 107);
+insert into Movie_table values(6,'The Incredibles', 'Brad Bird', 2004, 116);
+
+//2nd
+
+create table Movie_Rating(
+Movie_ID int,
+rating FLOAT,
+domestic_sales bigint,
+international_sale bigint
+);
+
+insert into movie_rating values(5,8.2,380843261,555900000);
+insert into movie_rating values(1,7.4,268492764,475066843);
+insert into movie_rating values(3,8,206445654,41727716);
+insert into movie_rating values(2,6.4,191452396,36840000);
+insert into movie_rating values(4,7.9,245852179,239163000);
+insert into movie_rating values(6,8,261441092,370001000);
+
+
+
+
+select movie.title from moive;
+
+select title, domestic_sales, international_sale from movie_table INNER JOIN movie_rating 
+ON movie_table.id = movie_rating.movie_id  where international_sale > domestic_sales;
+
+select movie_table.*,  from movie_table INNER JOIN movie_rating 
+ON movie_table.id = movie_rating.movie_id  
+ORDER BY Movie_Rating.rating DESC;
+
+
+
+
+
+
+ans == 
+
+1. select title, domestic_sales, international_sale from movie_table INNER JOIN movie_rating
+    -> ON movie_table.id = movie_rating.movie_id  where international_sale > domestic_sales;
+
+2. select movie_table.* from movie_table INNER JOIN movie_rating
+    -> ON movie_table.id = movie_rating.movie_id
+    -> ORDER BY Movie_Rating.rating DESC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

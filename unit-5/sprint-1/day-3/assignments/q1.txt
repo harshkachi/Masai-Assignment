@@ -1,0 +1,110 @@
+
+You are given a table express that table in 1NF form And state the rules for 1 NF.
+
+ID           Name         Age              Subject
+1             Abc         18               DBMS,OS
+2             Def         18               DBMS
+3             Ghi         20               Java
+
+-----------------------------------------
+
+CREATE Table Person(
+ID int PRIMARY KEY,
+Name varchar(25),
+Age int,
+Subject varchar(25)
+);
+
+INSERT into Person values(1, 'Abc', 18, 'DBMS,OS');
+INSERT into Person values(2, 'Def', 18, 'DBMS');
+INSERT into Person values(3, 'Ghi', 20, 'JAVA');
+
+mysql> select * from person
+    -> ;
++----+------+------+---------+
+| ID | Name | Age  | Subject |
++----+------+------+---------+
+|  1 | Abc  |   18 | DBMS,OS |
+|  2 | Def  |   18 | DBMS    |
+|  3 | Ghi  |   20 | JAVA    |
++----+------+------+---------+
+3 rows in set (0.00 sec)
+
+
+
+CREATE Table Person1(
+ID int,
+Name varchar(25),
+Age int,
+Subject varchar(25)
+);
+
+INSERT into Person1 values(1, 'Abc', 18, 'DBMS');
+INSERT into Person1 values(1, 'Abc', 18, 'OS');
+INSERT into Person1 values(2, 'Def', 18, 'DBMS');
+INSERT into Person1 values(3, 'Ghi', 20, 'JAVA');
+
+mysql> select * from person1;
++------+------+------+---------+
+| ID   | Name | Age  | Subject |
++------+------+------+---------+
+|    1 | Abc  |   18 | DBMS    |
+|    1 | Abc  |   18 | OS      |
+|    2 | Def  |   18 | DBMS    |
+|    3 | Ghi  |   20 | JAVA    |
++------+------+------+---------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+===================================================================
+
+
+Rules 1NF :
+ 
+1. The data are stored in a two-dimensional table.
+2. There are no repeating groups.
+3. There is a unique name for every Column.
+4. The order in which data is stored does not matter. 
+5. It should hold only atomic (single) value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mysql> create database u5d3;
+Query OK, 1 row affected (0.02 sec)
+mysql> use u5d3;
+Database changed
+mysql> CREATE Table Person(
+    -> ID int PRIMARY KEY,
+    -> Name varchar(25),
+    -> Age int,
+    -> Subject varchar(25)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT into Person values(1, 'Abc', 18, 'DBMS,OS');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT into Person values(2, 'Def', 18, 'DBMS');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT into Person values(3, 'Ghi', 20, 'JAVA');
+Query OK, 1 row affected (0.00 sec)
+
+
+

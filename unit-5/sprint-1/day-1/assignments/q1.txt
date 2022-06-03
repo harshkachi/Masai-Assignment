@@ -1,0 +1,154 @@
+
+// 1st
+create table student(
+S_ID varchar(4),
+S_NAME varchar(25),
+S_ADDRESS varchar(25),
+S_PHONE varchar(10),
+S_AGE int
+); 
+
+
+insert into student values('S1', 'RAM', 'DELHI' , '9455123451', 18);
+insert into student values('S2', 'RAMESH', 'GURGAON' , '9652431543', 18);
+insert into student values('S3', 'SUJIT', 'Chandigarh' , '9156253131', 20);
+insert into student values('S4', 'SURESH', 'DELHI' , '9156768971', 18);
+insert into student values('S5', 'RATAN', 'DELHI' , '9567890876', 18);
+
+
+
+
+//2nd
+
+create table course(
+C_ID varchar(4),
+C_NAME varchar(10)
+);
+
+insert into course values('C1', 'DSA');
+insert into course values('C2', 'JAVA');
+insert into course values('C3', 'MERN');
+
+
+//3rd
+
+create table Student_Course(
+S_ID varchar(4),
+C_ID varchar(4)
+);
+
+insert into student_course values('S1', 'C1');
+insert into student_course values('S1', 'C3');
+insert into student_course values('S2', 'C1');
+insert into student_course values('S3', 'C2');
+insert into student_course values('S4', 'C2');
+insert into student_course values('S4', 'C3');
+insert into student_course values('S5', 'C2');
+
+
+//4th
+
+ select * from student where s_address = 'delhi' && (select * student_course) ;
+
+select * from course left join student_course on course.C_id = student_course.C_id;
+
+
+SELECT
+  student.*
+FROM student INNER JOIN student_course 
+  ON student.s_id = student_course.s_id
+INNER JOIN course 
+  ON course.c_id = student_course.c_id
+WHERE Course.c_name = 'java' AND student.s_address = 'delhi';
+
+
+
+SELECT student.* from student INNER JOIN student_course ON student.s_id = student_course.s_id; 
+
+
+SELECT student.* from student INNER JOIN student_course ON student.s_id = student_course.s_id 
+INNER JOIN course ON student_course.c_id = course.c_id;
+
+
+
+/// Final ans
+SELECT student.* from student INNER JOIN student_course ON student.s_id = student_course.s_id 
+INNER JOIN course ON student_course.c_id = course.c_id 
+WHERE course.c_name = 'JAVA' AND student.s_address = 'delhi';
+
+
+
+
+
+mysql> use u5d1q1;
+Database changed
+
+mysql> select * from student;
++------+--------+------------+------------+-------+
+| S_ID | S_NAME | S_ADDRESS  | S_PHONE    | S_AGE |
++------+--------+------------+------------+-------+
+| S1   | RAM    | DELHI      | 9455123451 |    18 |
+| S2   | RAMESH | GURGAON    | 9652431543 |    18 |
+| S3   | SUJIT  | Chandigarh | 9156253131 |    20 |
+| S4   | SURESH | DELHI      | 9156768971 |    18 |
+| S5   | RATAN  | DELHI      | 9567890876 |    18 |
++------+--------+------------+------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from course;
++------+--------+
+| C_ID | C_NAME |
++------+--------+
+| C1   | DSA    |
+| C3   | MERN   |
+| C2   | JAVA   |
++------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student_course;
++------+------+
+| S_ID | C_ID |
++------+------+
+| S1   | C1   |
+| S1   | C3   |
+| S2   | C1   |
+| S2   | C1   |
+| S4   | C2   |
+| S4   | C3   |
+| S5   | C2   |
++------+------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT student.* from student INNER JOIN student_course ON student.s_id = student_course.s_id
+    -> INNER JOIN course ON student_course.c_id = course.c_id
+    -> WHERE course.c_name = 'JAVA' AND student.s_address = 'delhi';
++------+--------+-----------+------------+-------+
+| S_ID | S_NAME | S_ADDRESS | S_PHONE    | S_AGE |
++------+--------+-----------+------------+-------+
+| S4   | SURESH | DELHI     | 9156768971 |    18 |
+| S5   | RATAN  | DELHI     | 9567890876 |    18 |
++------+--------+-----------+------------+-------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+
+2nd
+SELECT S_ID,S_NAME,S_ADDRESS,S_PHONE,S_AGE FROM STUDENT WHERE S_ID IN(SELECT S_ID FROM COURSE 
+JOIN STUDENT_COURSE ON COURSE.C_ID=STUDENT_COURSE.C_ID AND COURSE.C_NAME="JAVA" )AND S_ADDRESS="DELHI";
+
+
+
+
+
+
+
+
+
+
+
+
+
+

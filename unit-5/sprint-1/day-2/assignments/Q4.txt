@@ -1,0 +1,160 @@
+7uQ. 4 Create database Student Details
+Tables:
+1.Students → (student_id(PK),name,address);
+2. Marks → (marks_id(PK),subject,score,student_id(FK));
+Get the output table with rows as (student_id ,student_name , total marks) for all the
+students . If there is any student who did not attended any of the exams show their
+marks as -1.
+
+
+---------------------
+
+CREATE table Student(
+Student_id int PRIMARY KEY,
+Name varchar(15),
+Address varchar(15)
+);
+
+
+insert into Student values(1, 'Aditya', 'Pune');
+insert into Student values(2, 'Shubham', 'Mumbai');
+insert into Student values(3, 'Aaksh', 'Shirur');
+insert into Student values(4, 'Omkar', 'Akola');
+insert into Student values(5, 'More', 'Delhi');
+
+
+
+CREATE table Marks(
+Mark_id int PRIMARY KEY,
+Subject varchar(15),
+Score int,
+Student_id int,
+FOREIGN KEY (Student_id) REFERENCES Student(Student_id)
+);
+
+
+insert into Marks values(1, 'Math', 98, 1);
+insert into Marks values(2, 'Sci', 87, 1);
+insert into Marks values(3, 'Eng', 75, 2);
+insert into Marks values(4, 'Math', 67, 2);
+insert into Marks values(5, 'Eng', 42, 3);
+insert into Marks values(6, 'Sci', NULL, 3);
+insert into Marks values(7, 'Math', NULL, 4);
+
+
+
+
+
+
+mysql> select * from Marks;
++---------+---------+-------+------------+
+| Mark_id | Subject | Score | Student_id |
++---------+---------+-------+------------+
+|       1 | Math    |    98 |          1 |
+|       2 | Sci     |    87 |          1 |
+|       3 | Eng     |    75 |          2 |
+|       4 | Math    |    67 |          2 |
+|       5 | Eng     |    42 |          3 |
+|       6 | Sci     |  NULL |          3 |
+|       7 | Math    |  NULL |          4 |
++---------+---------+-------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from Student;
++------------+---------+---------+
+| Student_id | Name    | Address |
++------------+---------+---------+
+|          1 | Aditya  | Pune    |
+|          2 | Shubham | Mumbai  |
+|          3 | Aaksh   | Shirur  |
+|          4 | Omkar   | Akola   |
+|          5 | More    | Delhi   |
++------------+---------+---------+
+5 rows in set (0.00 sec)
+
+
+
+----------------------------------------------
+trail n error
+
+
+select Student.Student_id, Student.name AS 'student_name',IFNULL((Marks.score),-1) AS 'total marks'
+From Student INNER JOIN  Marks
+ON  Student.Student_id = Marks.Student_id;
+
+
+SELECT DISTINCT Student.Student_id, name from Student
+INNER JOIN Marks on Student.Student_id = Marks.Student_id;
+
+
+
+SELECT DISTINCT Student.Student_id, name AS student_name, (SELECT SUM(Score)
+from Marks
+Group BY Student_id LIMIT 8) AS Total from Student
+INNER JOIN Marks on Student.Student_id = Marks.Student_id LIMIT 8;
+
+
+
+
+Select Student_id, SUM(IFNULL((Marks.score),-1))
+from Marks
+Group BY Student_id;
+
+
+Select Student_id, IFNULL((Marks.score),-1) AS 'total marks'
+from Marks
+Group BY Student_id;
+
+
+
+
+Select Student_id, SUM(Score) AS Total
+from Marks
+Group BY Student_id;
+
+
+Select *.sum(Score) from Marks where student_id = '2';
+
+
+
+ANS
+
+Select Student_id, SUM(IFNULL((Marks.score),-1))
+from Marks
+Group BY Student_id;
+
+
+
+
+Final ans
+/////////////////////////////////////////////////////////////////////
+Select student.student_id, student.name AS 'Student_Name',
+	IFNULL(SUM(marks.score), -1) AS 'Total_Marks'
+	From Student
+	LEFT JOIN 
+	Marks
+	ON student.student_id = marks.student_id
+	GROUP BY student.student_id;
+
+
+
+mysql> Select student.student_id, student.name AS 'Student_Name',
+    -> IFNULL(SUM(marks.score), -1) AS 'Total_Marks'
+    -> From Student
+    -> LEFT JOIN
+    -> Marks
+    -> ON student.student_id = marks.student_id
+    -> GROUP BY student.student_id;
++------------+--------------+-------------+
+| student_id | Student_Name | Total_Marks |
++------------+--------------+-------------+
+|          1 | Aditya       |         185 |
+|          2 | Shubham      |         142 |
+|          3 | Aaksh        |          42 |
+|          4 | Omkar        |          -1 |
+|          5 | More         |          -1 |
++------------+--------------+-------------+
+5 rows in set (0.01 sec)
+
+
+
